@@ -54,6 +54,12 @@ public class FindDiceJobsFirefox {
 			}
 		}
 		
+		//print out the links
+		for(int i = 0; i < linkList.length;i++)
+		{
+			System.out.println(i + ". " + linkList[i]);
+		}
+		
 		// TODO Auto-generated method stub
 
 	}
@@ -95,7 +101,6 @@ public class FindDiceJobsFirefox {
 					if(validateTrueOrFalse(sentence) == false)
 					{
 						returnable = false;
-						System.out.println("This is False");
 					}
 					sentence = "";
 					
@@ -103,7 +108,7 @@ public class FindDiceJobsFirefox {
 			}	
 			counter++;
 		}
-		System.out.println("return from find years " + returnable);
+		
 		return returnable;
 	}
 	public static boolean validateTrueOrFalse(String sentence)
@@ -113,7 +118,6 @@ public class FindDiceJobsFirefox {
 		//is it important?
 		if(sentence.contains("minimum") || sentence.contains("atleast") || sentence.contains("required") || sentence.contains("experience") || sentence.contains("requirements"))
 		{
-			System.out.println("gained access 1 ");
 			//this is important
 			//now to check if number greater than 3
 			int len = sentence.length();
@@ -142,19 +146,16 @@ public class FindDiceJobsFirefox {
 					}
 				}	
 			}
-			System.out.println("this was " + returnable + sentence);
 		}
 		
 		return returnable;
 	}
 	
 	public static void inspectLink(WebDriver driver, int x, String searchPage)
-	{
-		System.out.println("inside the inspector");
-		
+	{	
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		driver.findElement(By.id("position"+x)).click();
-		
 		
 		String description = grabText(driver);
 
@@ -172,7 +173,6 @@ public class FindDiceJobsFirefox {
 	public static void linkCollector (WebDriver driver)
 	{
 		linkList[validLinks] =  driver.getCurrentUrl();
-		System.out.println("we have a valid link " + linkList[validLinks]);
 		validLinks++; 
 	}
 
